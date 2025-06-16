@@ -1,0 +1,201 @@
+.work-queue-card {
+  background-color: #111827;
+  color: white;
+  border-radius: 16px;
+  padding: 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  max-width: 100%;
+  color: #ffffff;
+  border-radius: 12px;
+  height: 100%;
+}
+
+.card-title {
+  color: white;
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0;
+}
+
+::ng-deep .mat-mdc-card-header {
+  padding: 20px 20px 0 20px;
+}
+
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0;
+
+  .tab-btn {
+    background-color: #1f2937;
+    color: #d1d5db;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: none;
+    font-weight: 500;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: #374151;
+    }
+
+    &.active {
+      background-color: #2563eb;
+      color: #ffffff;
+    }
+  }
+}
+
+.work-queue-table {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: #e5e7eb;
+
+  .table-header {
+    display: grid;
+    grid-template-columns: 1.5fr 2fr 1.5fr 1.5fr 1fr auto;
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+    font-size: 0.75rem;
+    color: #9ca3af;
+    background: #1f2937;
+    border-bottom: 1px solid #374151;
+  }
+
+  .table-row {
+    display: grid;
+    grid-template-columns: 1.5fr 2fr 1.5fr 1.5fr 1fr auto;
+    padding: 1rem;
+    align-items: center;
+    border-bottom: 1px solid #2d3748;
+    background-color: #111827;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #1a1f2b;
+    }
+
+    .originator {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+
+      .avatar {
+        background: #374151;
+        color: #fff;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        font-size: 0.75rem;
+      }
+
+      .name {
+        font-size: 0.875rem;
+      }
+    }
+
+    .client-line {
+      .client {
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+
+      .line {
+        font-size: 0.75rem;
+        color: #9ca3af;
+        margin-top: 0.25rem;
+      }
+    }
+
+    .type, .created {
+      font-size: 0.875rem;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+
+        &.new {
+          background: #3b82f6;
+        }
+
+        &.pending {
+          background: #facc15;
+        }
+
+        &.in-progress {
+          background: #f97316;
+        }
+
+        &.completed {
+          background: #10b981;
+        }
+      }
+    }
+
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+
+      .action-btn {
+        background: #374151;
+        border: none;
+        color: #9ca3af;
+        cursor: pointer;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: #4b5563;
+          color: #fff;
+        }
+
+        mat-icon {
+          font-size: 18px;
+          width: 18px;
+          height: 18px;
+        }
+      }
+    }
+  }
+}
+
+.empty-state {
+  padding: 2rem;
+  color: #6b7280;
+  text-align: center;
+
+  mat-icon {
+    font-size: 2.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.875rem;
+  }
+}

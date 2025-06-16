@@ -1,0 +1,65 @@
+<mat-card class="work-queue-card">
+  <mat-card-header>
+    <mat-card-title class="card-title">Work queue</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content class="card-content">
+    <div class="tabs">
+      @for (tab of tabs(); track tab.label) {
+        <button 
+          class="tab-btn"
+          [class.active]="activeTab() === tab.label"
+          (click)="setActiveTab(tab.label)">
+          {{ tab.label }} ({{ getTabCount(tab.label) }})
+        </button>
+      }
+    </div>
+
+    <div class="work-queue-table">
+      <div class="table-header">
+        <div>ORIGINATOR</div>
+        <div>CLIENT/LINE</div>
+        <div>TYPE</div>
+        <div>STATUS</div>
+        <div>CREATED</div>
+        <div></div>
+      </div>
+
+      @for (item of filteredItems(); track item.id) {
+        <div class="table-row">
+          <div class="originator">
+            <div class="avatar">{{ getInitials(item.originator) }}</div>
+            <span class="name">{{ item.originator }}</span>
+          </div>
+
+          <div class="client-line">
+            <div class="client">{{ item.client }}</div>
+            <div class="line">{{ item.lineOfBusiness }}</div>
+          </div>
+
+          <div class="type">{{ item.type }}</div>
+
+          <div class="status">
+            <span class="dot" [ngClass]="statusColor(item.status)"></span>
+            {{ item.status }}
+          </div>
+
+          <div class="created">{{ item.createdAt | date: 'MM/d/yyyy' }}</div>
+
+          <div class="actions">
+            <button class="action-btn" (click)="onActionClick(item, $event)">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+          </div>
+        </div>
+      }
+
+      @if (filteredItems().length === 0) {
+        <div class="empty-state">
+          <mat-icon>inbox</mat-icon>
+          <p>No items found for the selected filter</p>
+        </div>
+      }
+    </div>
+  </mat-card-content>
+</mat-card>

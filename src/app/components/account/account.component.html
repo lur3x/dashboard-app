@@ -1,0 +1,566 @@
+<div class="dashboard-container">
+  <!-- Header -->
+  <div class="header">
+    <div class="breadcrumb">
+      <span class="breadcrumb-item">Dashboard</span>
+      <span class="separator">//</span>
+      <span class="breadcrumb-item">Accounts</span>
+      <span class="separator">//</span>
+      <span class="breadcrumb-item active">Maritime Logistics Corp</span>
+    </div>
+  </div>
+
+  <!-- Company Info and Alerts -->
+  <div class="main-content">
+    <div class="company-info">
+      <div class="company-logo">
+        <div class="logo-circle">
+          <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+            <circle cx="30" cy="30" r="27" fill="#3B82F6" stroke="#60A5FA" stroke-width="2"/>
+            <path d="M18 30C24 24 36 24 42 30C36 36 24 36 18 30Z" fill="white"/>
+          </svg>
+        </div>
+      </div>
+      <div class="company-details">
+        <h1 class="company-name">Maritime Logistics Corp</h1>
+        <div class="company-address">425 Harbor Boulevard, Suite 300<br>Seattle, WA 98104</div>
+        <div class="company-meta">
+          <div class="meta-item">
+            <span class="meta-label">EXISTING ACCOUNT</span>
+            <span class="meta-value">54383</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">BROKER</span>
+            <span class="meta-value">Marsh McLennan</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">UNDERWRITER</span>
+            <span class="meta-value">Kate Johnson</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="alerts-section">
+        <div class="alerts-header">
+          <div class="alert-icon">⚠️</div>
+          <h2>Needs Attention</h2>
+        </div>
+        <div class="alerts-list">
+          <div *ngFor="let alert of alerts()" class="alert-item" [ngClass]="'alert-' + alert.type">
+            <div class="alert-content">
+              <h3>{{ alert.title }}</h3>
+              <p>{{ alert.description }}</p>
+              <a href="#" class="alert-action">{{ alert.actionText }} →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Performance Metrics -->
+  <div class="metrics-section">
+    <h2 class="section-title">Performance Metrics</h2>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-header">
+          <span class="metric-label">Winnability</span>
+          <div class="rating-dots">
+            <span class="dot active"></span>
+            <span class="dot active"></span>
+            <span class="dot active"></span>
+            <span class="dot active"></span>
+            <span class="dot"></span>
+          </div>
+        </div>
+        <div class="metric-value large">Very Strong</div>
+        <a href="#" class="metric-link">See all factors →</a>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-header">
+          <span class="metric-label">Loss Ratio</span>
+        </div>
+        <div class="metric-value">25% <span class="target">vs 42% target</span></div>
+        <a href="#" class="metric-link">View history →</a>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-header">
+          <span class="metric-label">Premium Growth</span>
+        </div>
+        <div class="metric-value">12.4% <span class="growth">YoY increase</span></div>
+        <div class="metric-subtitle">$123M vs $150M Target</div>
+        <a href="#" class="metric-link">View trend →</a>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-header">
+          <span class="metric-label">Exposure Distribution</span>
+        </div>
+        <div class="exposure-bars">
+          <div class="exposure-item">
+            <span class="exposure-label">Marine Cargo: 71.4%</span>
+            <div class="exposure-bar">
+              <div class="exposure-fill" style="width: 71.4%"></div>
+            </div>
+          </div>
+          <div class="exposure-item">
+            <span class="exposure-label">General Liability: 20%</span>
+            <div class="exposure-bar">
+              <div class="exposure-fill" style="width: 20%"></div>
+            </div>
+          </div>
+          <div class="exposure-item">
+            <span class="exposure-label">Workers Comp: 8.6%</span>
+            <div class="exposure-bar">
+              <div class="exposure-fill" style="width: 8.6%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Policies -->
+  <div class="policies-section">
+    <h2 class="section-title">Policies</h2>
+    <div class="policies-grid">
+      <div *ngFor="let policy of policies()" class="policy-card">
+        <div class="policy-icon" [style.color]="policy.color">
+          {{ policy.icon }}
+        </div>
+        <div class="policy-info">
+          <h3>{{ policy.name }}</h3>
+          <div class="policy-details">
+            <div class="policy-premium">Premium: {{ policy.premium }}</div>
+            <div class="policy-date">Eff Date: {{ policy.effectiveDate }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Section -->
+  <div class="bottom-section">
+    <div class="account-status">
+      <h2 class="section-title">Account Status</h2>
+      <div class="status-timeline">
+        <div *ngFor="let step of accountSteps(); let i = index" class="status-step" [ngClass]="{ 'completed': step.completed, 'current': i === 5 }">
+          <div class="step-circle">
+            <span *ngIf="step.completed">✓</span>
+            <span *ngIf="!step.completed && i === 5" class="pending">⏱</span>
+          </div>
+          <span class="step-label">{{ step.name }}</span>
+          <div *ngIf="i < accountSteps().length - 1" class="step-connector"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="compliance-section">
+      <div class="compliance-header">
+        <h2 class="section-title">Compliance & Documentation</h2>
+        <a href="#" class="see-history">See history →</a>
+      </div>
+      <div class="compliance-grid">
+        <div *ngFor="let item of complianceItems()" class="compliance-item" [ngClass]="{ 'completed': item.completed }">
+          <div class="compliance-icon">
+            <span *ngIf="item.completed">✓</span>
+          </div>
+          <span>{{ item.name }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Account Details Section -->
+  <div class="account-details-section">
+    <h2 class="section-title">Account Details</h2>
+    <div class="account-details-content">
+      <div class="sidebar-menu">
+        <div class="menu-section">
+          <div class="menu-header">
+            <span>DECISION SUPPORT</span>
+            <span class="menu-badge">4</span>
+          </div>
+          <div class="menu-items">
+            <div class="menu-item active">Winnability</div>
+            <div class="menu-item">Exposure Review & Suggested Coverage</div>
+            <div class="menu-item">Portfolio Strategy Alignment</div>
+            <div class="menu-item">Broker Analytics</div>
+          </div>
+        </div>
+        <div class="menu-section">
+          <div class="menu-header">
+            <span>RISK ASSESSMENT</span>
+            <span class="menu-badge">6</span>
+          </div>
+        </div>
+        <div class="menu-section">
+          <div class="menu-header">
+            <span>DOCUMENTS AND COMPLIANCE</span>
+            <span class="menu-badge">2</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="winnability-content">
+        <h3 class="content-title">Winnability</h3>
+        
+        <div class="winnability-overview">
+          <div class="overall-score">
+            <div class="score-header">Overall Score</div>
+            <div class="score-value">
+              82% 
+              <span class="score-rating">
+                <span class="dot active"></span>
+                <span class="dot active"></span>
+                <span class="dot active"></span>
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                Very Strong
+              </span>
+            </div>
+          </div>
+
+          <div class="historical-trend">
+            <div class="trend-header">Historical trend</div>
+            <div class="trend-chart">
+              <svg width="200" height="60" viewBox="0 0 200 60">
+                <path d="M10,40 Q50,30 90,35 T170,25" stroke="#3B82F6" stroke-width="2" fill="none"/>
+                <circle cx="170" cy="25" r="3" fill="#3B82F6"/>
+              </svg>
+              <div class="trend-labels">
+                <span>Jan</span>
+                <span>Feb</span>
+                <span>Mar</span>
+                <span>Apr</span>
+                <span>Now</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="position-metrics">
+            <div class="position-header">Position</div>
+            <div class="position-bars">
+              <div class="position-item">
+                <span class="position-label">Your score: 82%</span>
+                <div class="position-bar">
+                  <div class="position-fill" style="width: 82%"></div>
+                </div>
+              </div>
+              <div class="position-item">
+                <span class="position-label">Market Avg: 68%</span>
+                <div class="position-bar">
+                  <div class="position-fill secondary" style="width: 68%"></div>
+                </div>
+              </div>
+              <div class="position-item">
+                <span class="position-label">Top competitor: 88%</span>
+                <div class="position-bar">
+                  <div class="position-fill tertiary" style="width: 88%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="winnability-factors">
+          <div class="factors-column">
+            <div class="factors-header positive">
+              <span class="factor-icon">↗</span>
+              Increasing Winnability
+            </div>
+            <div class="factor-items">
+              <div class="factor-item">
+                <span class="factor-number">1</span>
+                <div class="factor-content">
+                  <span class="factor-name">Brokers relationship</span>
+                  <div class="factor-bar positive">
+                    <div class="factor-fill" style="width: 85%"></div>
+                  </div>
+                  <span class="factor-change">+28%</span>
+                </div>
+              </div>
+              <div class="factor-item">
+                <span class="factor-number">2</span>
+                <div class="factor-content">
+                  <span class="factor-name">Loss history</span>
+                  <div class="factor-bar positive">
+                    <div class="factor-fill" style="width: 75%"></div>
+                  </div>
+                  <span class="factor-change">+22%</span>
+                </div>
+              </div>
+              <div class="factor-item">
+                <span class="factor-number">3</span>
+                <div class="factor-content">
+                  <span class="factor-name">Industry growth</span>
+                  <div class="factor-bar positive">
+                    <div class="factor-fill" style="width: 65%"></div>
+                  </div>
+                  <span class="factor-change">+16%</span>
+                </div>
+              </div>
+              <div class="factor-item">
+                <span class="factor-number">4</span>
+                <div class="factor-content">
+                  <span class="factor-name">Multiline opportunity</span>
+                  <div class="factor-bar positive">
+                    <div class="factor-fill" style="width: 55%"></div>
+                  </div>
+                  <span class="factor-change">+11%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="factors-column">
+            <div class="factors-header negative">
+              <span class="factor-icon">↘</span>
+              Decreasing Winnability
+            </div>
+            <div class="factor-items">
+              <div class="factor-item">
+                <span class="factor-number">1</span>
+                <div class="factor-content">
+                  <span class="factor-name">Premium pricing</span>
+                  <div class="factor-bar negative">
+                    <div class="factor-fill" style="width: 70%"></div>
+                  </div>
+                  <span class="factor-change">-24%</span>
+                </div>
+              </div>
+              <div class="factor-item">
+                <span class="factor-number">2</span>
+                <div class="factor-content">
+                  <span class="factor-name">Total exposure</span>
+                  <div class="factor-bar negative">
+                    <div class="factor-fill" style="width: 60%"></div>
+                  </div>
+                  <span class="factor-change">-18%</span>
+                </div>
+              </div>
+              <div class="factor-item">
+                <span class="factor-number">3</span>
+                <div class="factor-content">
+                  <span class="factor-name">Loss ratio trend</span>
+                  <div class="factor-bar negative">
+                    <div class="factor-fill" style="width: 50%"></div>
+                  </div>
+                  <span class="factor-change">-13%</span>
+                </div>
+              </div>
+              <div class="factor-item">
+                <span class="factor-number">4</span>
+                <div class="factor-content">
+                  <span class="factor-name">Market competition</span>
+                  <div class="factor-bar negative">
+                    <div class="factor-fill" style="width: 40%"></div>
+                  </div>
+                  <span class="factor-change">-5%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ai-recommendations">
+          <div class="ai-header">
+            <span class="ai-icon">🤖</span>
+            <span>AI-Powered Recommendations</span>
+          </div>
+          <div class="recommendations-list">
+            <div class="recommendation-item">
+              <div class="recommendation-content">
+                <h4>Offer 5% premium discount in exchange for 3-year commitment</h4>
+                <p>Historical win rate increases 24% with multi-year commitments. Current pricing is 12% above market average. This approach would strengthen retention while maintaining adequate profitability.</p>
+              </div>
+              <button class="apply-btn">Apply</button>
+            </div>
+            <div class="recommendation-item">
+              <div class="recommendation-content">
+                <h4>Propose risk control services for cargo handling procedures</h4>
+                <p>Can potentially reduce loss ratio by 15-20% based on similar maritime accounts in your portfolio. Specific focus on loading/unloading operations would address the most frequent claim scenarios.</p>
+              </div>
+              <button class="apply-btn">Apply</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Communication Section -->
+  <div class="communication-section">
+    <h2 class="section-title">Communication</h2>
+    <div class="communication-content">
+      <div class="communication-header">
+        <div class="search-bar">
+          <input type="text" placeholder="Search..." class="search-input">
+        </div>
+        <div class="communication-filters">
+          <button class="filter-btn active">Filter</button>
+          <button class="filter-btn">Group</button>
+        </div>
+      </div>
+      
+      <div class="communication-grid">
+        <div class="communication-column">
+          <div *ngFor="let item of communicationItems().slice(0, 2)" 
+               class="communication-item" 
+               [ngClass]="[getPriorityClass(item.priority), getTypeClass(item.type)]">
+            <div class="communication-header-badge">
+              <span class="communication-badge" 
+                    [ngClass]="item.type === 'Policy Renewal' ? 'badge-new' : 
+                               item.type === 'New Quote Request' ? 'badge-new' : 
+                               'badge-responded'">
+                {{ item.type === 'Paid' ? 'Responded' : 'NEW' }}
+              </span>
+            </div>
+            <div class="communication-content">
+              <h3 class="communication-title">{{ item.title }}</h3>
+              <div class="communication-meta">
+                <span class="communication-author">{{ item.type === 'Policy Renewal' ? 'Michael Roberts' : 'Sarah Chen' }}</span>
+                <span class="communication-date">{{ item.date }}</span>
+              </div>
+              <p class="communication-description">{{ item.description }}</p>
+              <div class="communication-footer">
+                <div class="communication-attachments">
+                  <span class="attachment-icon">📎</span>
+                  <span class="attachment-count">3 attachments</span>
+                </div>
+                <button class="reply-btn">Reply</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="communication-column">
+          <div *ngFor="let item of communicationItems().slice(2)" 
+               class="communication-item" 
+               [ngClass]="[getPriorityClass(item.priority), getTypeClass(item.type)]">
+            <div class="communication-header-badge">
+              <span class="communication-badge" 
+                    [ngClass]="item.type === 'Paid' ? 'badge-responded' : 'badge-new'">
+                {{ item.type === 'Paid' ? 'Responded' : 'NEW' }}
+              </span>
+            </div>
+            <div class="communication-content">
+              <h3 class="communication-title">{{ item.title }}</h3>
+              <div class="communication-meta">
+                <span class="communication-author">{{ item.id === '3' ? 'Joshua Dunmire' : 'Isabel Kroller' }}</span>
+                <span class="communication-date">{{ item.date }}</span>
+              </div>
+              <p class="communication-description">{{ item.description }}</p>
+              <div class="communication-footer">
+                <div class="communication-attachments">
+                  <span class="attachment-icon">📎</span>
+                  <span class="attachment-count">{{ item.id === '4' ? '5' : '3' }} attachments</span>
+                </div>
+                <button class="reply-btn">Reply</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="policies-container">
+      <div class="header">
+        <h1>Policies</h1>
+      </div>
+      
+      <div class="controls">
+        <div class="search-container">
+          <input 
+            type="text" 
+            placeholder="Search" 
+            [(ngModel)]="searchTerm"
+            class="search-input"
+          />
+        </div>
+        <div class="action-buttons">
+          <button class="filter-btn">Filter</button>
+          <button class="group-btn">Group</button>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table class="policies-table">
+          <thead>
+            <tr>
+              <th>LINE</th>
+              <th>EFF DATE</th>
+              <th>EXP DATE</th>
+              <th>STATUS</th>
+              <th>EXPIRING TECH</th>
+              <th>EXPIRING PREMIUM</th>
+              <th>RENEWAL TO TECH</th>
+              <th>RENEWAL TECH</th>
+              <th>RENEWAL PREMIUM</th>
+              <th>RATE CHANGE</th>
+              <th>LOSS RATIO</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let policy of filteredPolicies()" class="policy-row">
+              <td class="line-cell">
+                <div class="line-info">
+                  <div class="icon-container" [style.background-color]="policy.color">
+                    {{ policy.icon }}
+                  </div>
+                  <div class="line-details">
+                    <div class="line-name">{{ policy.line }}</div>
+                    <div class="line-number">{{ policy.lineNumber }}</div>
+                  </div>
+                </div>
+              </td>
+              <td>{{ policy.effDate }}</td>
+              <td>{{ policy.expDate }}</td>
+              <td>
+                <span class="status-badge" [ngClass]="'status-' + policy.status.toLowerCase()">
+                  {{ policy.status }}
+                </span>
+              </td>
+              <td>{{ policy.expiringTech }}</td>
+              <td>{{ policy.expiringPremium }}</td>
+              <td>{{ policy.renewalToTech }}</td>
+              <td>{{ policy.renewalTech }}</td>
+              <td>{{ policy.renewalPremium }}</td>
+              <td>
+                <span class="rate-change" [ngClass]="getRateChangeClass(policy.rateChange)">
+                  {{ policy.rateChange }}
+                </span>
+              </td>
+              <td>
+                <span class="loss-ratio-badge" [ngClass]="getLossRatioClass(policy.lossRatio)">
+                  {{ policy.lossRatio }}
+                </span>
+              </td>
+              <td>
+                <button class="info-btn">ⓘ</button>
+              </td>
+            </tr>
+            <tr class="total-row">
+              <td colspan="4"><strong>TOTAL (4)</strong></td>
+              <td><strong>{{ totals().expiringTech }}</strong></td>
+              <td><strong>{{ totals().expiringPremium }}</strong></td>
+              <td><strong>{{ totals().renewalToTech }}</strong></td>
+              <td><strong>{{ totals().renewalTech }}</strong></td>
+              <td><strong>{{ totals().renewalPremium }}</strong></td>
+              <td><strong>{{ totals().rateChange }}</strong></td>
+              <td>
+                <span class="loss-ratio-badge total-loss-ratio">
+                  {{ totals().lossRatio }}
+                </span>
+              </td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>

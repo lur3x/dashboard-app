@@ -1,0 +1,158 @@
+ .market-intelligence-card {
+      background: #111827;
+      color: white;
+      border-radius: 16px;
+      padding: 0;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      max-width: 100%;
+      height: 100%;
+    }
+
+    .card-title {
+      color: white;
+      font-size: 24px;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    ::ng-deep .mat-mdc-card-header {
+      padding: 20px 20px 0 20px;
+    }
+
+    .card-content {
+      padding: 20px;
+      padding-top: 16px;
+    }
+
+    .intelligence-item {
+      display: flex;
+      align-items: flex-start;
+      padding: 16px 0;
+      border-bottom: 1px solid #3a3d5a;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border-radius: 8px;
+      margin: 0 -8px;
+      padding-left: 8px;
+      padding-right: 8px;
+      position: relative;
+    }
+
+    .intelligence-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .intelligence-item:hover {
+      background: rgba(66, 133, 244, 0.1);
+      transform: translateX(4px);
+    }
+
+    .intelligence-item.new-item {
+      background: rgba(255, 193, 7, 0.05);
+      border-left: 3px solid #ffc107;
+      padding-left: 13px;
+      margin-left: -8px;
+    }
+
+    .item-indicator {
+      margin-right: 12px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .severity-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4ade80;
+    }
+
+    .severity-dot.high {
+      background: #ef4444;
+      box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+    }
+
+    .severity-dot.medium {
+      background: #fbbf24;
+      box-shadow: 0 0 8px rgba(251, 191, 36, 0.4);
+    }
+
+    .severity-dot.low {
+      background: #60a5fa;
+      box-shadow: 0 0 8px rgba(96, 165, 250, 0.4);
+    }
+
+    .item-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .item-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: white;
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+
+    .item-description {
+      font-size: 13px;
+      color: #8a8db5;
+      line-height: 1.4;
+      word-wrap: break-word;
+    }
+
+    .new-badge {
+      background: #ffc107;
+      color: #1a1d2e;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 8px;
+      letter-spacing: 0.5px;
+      margin-left: 8px;
+      flex-shrink: 0;
+      align-self: flex-start;
+    }
+
+    /* Pulse animation for high severity items */
+    .severity-dot.high {
+      animation: pulse-red 2s infinite;
+    }
+
+    @keyframes pulse-red {
+      0% {
+        box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+      }
+      50% {
+        box-shadow: 0 0 16px rgba(239, 68, 68, 0.8);
+      }
+      100% {
+        box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+      }
+    }
+
+    /* Responsive design */
+    @media (max-width: 480px) {
+      .market-intelligence-card {
+        margin: 10px;
+        max-width: none;
+      }
+      
+      .card-content {
+        padding: 16px;
+      }
+      
+      .intelligence-item {
+        padding: 12px 0;
+      }
+      
+      .item-title {
+        font-size: 13px;
+      }
+      
+      .item-description {
+        font-size: 12px;
+      }
+    }

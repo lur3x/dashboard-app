@@ -1,0 +1,21 @@
+<mat-card class="quick-actions-card">
+      <mat-card-header>
+        <mat-card-title class="card-title">Quick actions</mat-card-title>
+      </mat-card-header>
+      
+      <mat-card-content class="card-content">
+        @for (action of quickActions(); track action.id) {
+          <button
+            mat-raised-button
+            class="action-button"
+            [disabled]="action.disabled"
+            (click)="onActionClick(action)"
+            matRipple>
+            @if (action.icon) {
+              <mat-icon class="action-icon">{{ action.icon }}</mat-icon>
+            }
+            {{ action.label }}
+          </button>
+        }
+      </mat-card-content>
+    </mat-card>

@@ -1,0 +1,44 @@
+<mat-card class="portfolio-card">
+      <mat-card-header>
+        <mat-card-title class="card-title">Portfolio goals</mat-card-title>
+      </mat-card-header>
+      
+      <mat-card-content class="card-content">
+        @for (goal of portfolioGoals(); track goal.id) {
+          <div class="goal-section">
+            <div class="goal-header">
+              <span class="goal-label">{{ goal.label }}</span>
+              @if (goal.target) {
+                <span class="goal-target">{{ goal.target }}</span>
+              }
+            </div>
+            
+            @if (goal.segments) {
+              <!-- Segmented progress bar for ratio-based goals -->
+              <div class="progress-container">
+                <div class="progress-segments">
+                  @for (segment of goal.segments; track $index) {
+                    <div class="segment" [class]="segment.type" [style.width.%]="segment.width"></div>
+                  }
+                </div>
+              </div>
+              @if (goal.statusText) {
+                <div class="progress-status" [class]="goal.status">
+                  {{ goal.statusText }}
+                </div>
+              }
+            } @else {
+              <!-- Target-based progress bar -->
+              <div class="target-bar">
+                <div class="target-current">${{ formatCurrency(goal.currentValue!) }}</div>
+                <div class="target-goal">${{ formatCurrency(goal.targetValue!) }}</div>
+              </div>
+              <div class="target-progress">
+                <div class="target-fill" [style.width.%]="goal.percentage"></div>
+              </div>
+              <div class="progress-percentage">{{ goal.percentage }}%</div>
+            }
+          </div>
+        }
+      </mat-card-content>
+    </mat-card>

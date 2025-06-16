@@ -1,0 +1,90 @@
+<mat-card class="my-accounts-card">
+  <mat-card-header>
+     <div class="header">
+        <mat-card-title class="card-title">My accounts</mat-card-title>
+          <div class="search-container">
+            <input type="text" 
+                   class="search-input" 
+                   placeholder="Search" 
+                   [(ngModel)]="searchTerm"
+                   (input)="onSearch()">
+          </div>
+          <div class="actions">
+            <button class="action-btn outline" (click)="onFilter()">Filter</button>
+            <button class="action-btn outline" (click)="onSort()">Sort</button>
+            <button class="action-btn outline" (click)="onGroup()">Group</button>
+            <button class="action-btn primary" (click)="onNew()">+ New</button>
+          </div>
+        </div>
+        </mat-card-header>
+  <mat-card-content>
+    <div class="table-container">
+      <table class="accounts-table">
+        <thead>
+          <tr>
+            <th>ACCOUNT NAME/TYPE</th>
+            <th>LINE</th>
+            <th>BROKER</th>
+            <th>RENEWAL DATE</th>
+            <th>PREMIUM</th>
+            <th>RATED PREMIUM</th>
+            <th>LOSS RATIO</th>
+            <th>APPETITE</th>
+            <th>STATUS</th>
+            <th>TRIAGE</th>
+            <th>WINNABILITY</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let account of filteredAccounts" class="account-row">
+            <td class="account-name">
+              <div class="name-primary">{{ account.name }}</div>
+              <div class="name-secondary">{{ account.type }}</div>
+            </td>
+            <td>{{ account.line }}</td>
+            <td>{{ account.broker }}</td>
+            <td>{{ account.renewalDate }}</td>
+            <td class="premium">{{ account.premium }}</td>
+            <td class="rated-premium">{{ account.ratedPremium }}</td>
+            <td>
+              <span class="loss-ratio" [ngClass]="getLossRatioClass(account.lossRatio)">
+                {{ account.lossRatio }}%
+              </span>
+            </td>
+            <td>
+              <span class="appetite" [ngClass]="getAppetiteClass(account.appetite)">
+                {{ account.appetite }}
+              </span>
+            </td>
+            <td>
+              <div class="status" [ngClass]="getStatusClass(account.status)">
+                <span class="status-dot"></span>
+                {{ account.status }}
+              </div>
+            </td>
+            <td>
+              <span class="triage-badge">{{ account.triage }}</span>
+            </td>
+            <td>
+              <div class="winnability">
+                <div class="winnability-dots">
+                  <span class="dot" 
+                        *ngFor="let dot of getWinnabilityDots(account.winnability)" 
+                        [ngClass]="dot.class">
+                  </span>
+                </div>
+                <span class="winnability-text">{{ account.winnability }}</span>
+              </div>
+            </td>
+            <td>
+              <button class="info-btn" (click)="onAccountInfo(account)">
+                <i class="info-icon">i</i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>

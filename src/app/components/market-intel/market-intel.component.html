@@ -1,0 +1,26 @@
+<mat-card class="market-intelligence-card">
+      <mat-card-header>
+        <mat-card-title class="card-title">Market intelligence</mat-card-title>
+      </mat-card-header>
+      
+      <mat-card-content class="card-content">
+        @for (item of marketIntelligence(); track item.id) {
+          <div 
+            class="intelligence-item"
+            [class.new-item]="item.isNew"
+            (click)="onItemClick(item)"
+            matRipple>
+            <div class="item-indicator">
+              <div class="severity-dot" [class]="item.severity"></div>
+            </div>
+            <div class="item-content">
+              <div class="item-title">{{ item.title }}</div>
+              <div class="item-description">{{ item.description }}</div>
+            </div>
+            @if (item.isNew) {
+              <div class="new-badge">NEW</div>
+            }
+          </div>
+        }
+      </mat-card-content>
+    </mat-card>

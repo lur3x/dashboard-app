@@ -1,0 +1,53 @@
+
+<header class="dashboard-header">
+        <div class="welcome-section">
+          <h1>Hi Arthur, welcome! You have 6 open tasks.</h1>
+        </div>
+        <div class="header-actions">
+          <div class="search-container">
+            <input 
+              type="text" 
+              placeholder="Search" 
+              class="search-input"
+            >
+            <i class="search-icon">🔍</i>
+          </div>
+          <div class="user-avatar">AR</div>
+        </div>
+      </header>
+      
+<nav class="navigation-container">
+      <div class="nav-tabs-wrapper">
+        <div class="nav-tabs">
+          @for (tab of navigationTabs(); track tab.id) {
+            <button 
+              [class]="getTabClass(tab)"
+              (click)="selectTab(tab)"
+              type="button">
+              <mat-icon aria-hidden="false" aria-label="Example home icon" [fontIcon]="tab.icon"></mat-icon>
+              {{ tab.label }}
+            </button>
+          }
+        </div>
+        
+        <div class="nav-arrows">
+          <button 
+            class="nav-arrow nav-arrow-left" 
+            (click)="scrollLeft()"
+            [disabled]="!canScrollLeft()"
+            type="button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15,18 9,12 15,6"></polyline>
+            </svg>
+          </button>
+          <button 
+            class="nav-arrow nav-arrow-right" 
+            (click)="scrollRight()"
+            [disabled]="!canScrollRight()"
+            type="button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9,18 15,12 9,6"></polyline>
+            </svg>
+          </button>
+        </div>
+      </div>
